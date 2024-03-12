@@ -215,65 +215,13 @@ void handleGamepad()
 	close(js);
 }
 
-int main(void)
+void createVehicle(btAlignedObjectArray<btCollisionShape*> &collisionShapes, btVector3 chasisSize)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 1366;
-    const int screenHeight = 768;
-
-    int i;
-    char c[100];
-    Vector3 bodyPos[20];
-	btScalar yaw, pitch, roll;
-
-	int topGear = 5, currentGear = 0;
-	Gear gears[topGear+1];
-
-	gears[0] = {400,0};	// punto muerto
-	gears[1] = {7000,40};
-	gears[2] = {3000,80};
-	gears[3] = {2000,120};
-	gears[4] = {800,180};
-	gears[5] = {500,270};
-
-	btVector3 chasisSize = {CHASIS_WIDTH, CHASIS_HEIGHT, CHASIS_LENGHT};
-
-	btAlignedObjectArray<btCollisionShape*> collisionShapes;
-	btDefaultCollisionConfiguration* collisionConfiguration;
-	btCollisionDispatcher* dispatcher;
-	btBroadphaseInterface* broadphase;
-	btConstraintSolver* solver;
 	btRigidBody* carChassis;
 	btCollisionShape* wheelShape;
-
-	//	MUNDO
-
-	btCollisionShape* groundShape = new btBoxShape(btVector3(FLOOR_WIDTH/2, FLOOR_HEIGHT/2, FLOOR_LENGTH/2));
-	collisionShapes.push_back(groundShape);
-
-	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(collisionConfiguration);
-	btVector3 worldMin(-1000, -1000, -1000);
-	btVector3 worldMax(1000, 1000, 1000);
-	broadphase = new btAxisSweep3(worldMin, worldMax);
-
-	solver = new btSequentialImpulseConstraintSolver();
-
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128;  //for direct solver, it is better to solve multiple objects together, small batches have high overhead
-	dynamicsWorld->getSolverInfo().m_numIterations = 100;
-
-	dynamicsWorld->setGravity(btVector3(0,-90.8,0));
 	btTransform tr;
+
 	tr.setIdentity();
-	tr.setOrigin(btVector3(0, -3, 0));
-
-	//either use heightfield or triangle mesh
-
-	//create ground object
-	btRigidBody *ground = localCreateRigidBody(0, tr, groundShape);
-	ground->setFriction(1);
 
 	//CAHSIS
 	btCollisionShape* chassisShape = new btBoxShape(chasisSize/2.0f);
@@ -381,33 +329,6 @@ int main(void)
 		pHinge2->setDbgDrawSize(btScalar(5.f));
 	}
 
-	//CARROCERÍA
-	// {
-	// 	btCollisionShape* bodyShape = new btBoxShape(btVector3(BODY_WIDTH/2, BODY_HEIGHT/2, BODY_LENGHT/2));
-		
-	// 	btTransform tr;
-	// 	tr.setIdentity();
-	// 	//localTrans effectively shifts the center of mass with respect to the chassis
-	// 	tr.setOrigin(btVector3(0, FALLHEIGHT, 0));
-
-	// 	btRigidBody* bodyBody = createRigidBody(bodyMass, tr, bodyShape);
-	// 	bodyBody->setCollisionFlags(carChassis->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-		
-	// 	btRigidBody* pBodyA = carChassis;
-	// 	pBodyA->setActivationState(DISABLE_DEACTIVATION);
-		
-	// 	btTransform frameA;
-	// 	frameA.setIdentity();
-	// 	frameA.setOrigin(btVector3(0,BODY_HEIGHT+suspensionHeight,0));
-	// 	btTransform frameB;
-	// 	frameB.setIdentity();
-	// 	frameB.setOrigin(btVector3(0,0,0));
-
-	// 	btFixedConstraint* fix = new btFixedConstraint(*pBodyA, *bodyBody, frameA, frameB);
-
-	// 	dynamicsWorld->addConstraint(fix, true);
-	// }
-
 	//resetForklift()
 	gVehicleSteering = 0.f;
 	gBreakingForce = defaultBreakingForce;
@@ -417,6 +338,67 @@ int main(void)
 	carChassis->setLinearVelocity(btVector3(0, 0, 0));
 	carChassis->setAngularVelocity(btVector3(0, 0, 0));
 	dynamicsWorld->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(carChassis->getBroadphaseHandle(), dynamicsWorld->getDispatcher());
+}
+
+int main(void)
+{
+    // Initialization
+    //--------------------------------------------------------------------------------------
+    const int screenWidth = 1366;
+    const int screenHeight = 768;
+
+    int i;
+    char c[100];
+    Vector3 bodyPos[20];
+	btScalar yaw, pitch, roll;
+
+	int topGear = 5, currentGear = 0;
+	Gear gears[topGear+1];
+
+	gears[0] = {400,0};	// punto muerto
+	gears[1] = {7000,40};
+	gears[2] = {3000,80};
+	gears[3] = {2000,120};
+	gears[4] = {800,180};
+	gears[5] = {500,270};
+
+	btVector3 chasisSize = {CHASIS_WIDTH, CHASIS_HEIGHT, CHASIS_LENGHT};
+
+	btAlignedObjectArray<btCollisionShape*> collisionShapes;
+	btDefaultCollisionConfiguration* collisionConfiguration;
+	btCollisionDispatcher* dispatcher;
+	btBroadphaseInterface* broadphase;
+	btConstraintSolver* solver;
+
+	//	MUNDO
+
+	btCollisionShape* groundShape = new btBoxShape(btVector3(FLOOR_WIDTH/2, FLOOR_HEIGHT/2, FLOOR_LENGTH/2));
+	collisionShapes.push_back(groundShape);
+
+	collisionConfiguration = new btDefaultCollisionConfiguration();
+	dispatcher = new btCollisionDispatcher(collisionConfiguration);
+	btVector3 worldMin(-1000, -1000, -1000);
+	btVector3 worldMax(1000, 1000, 1000);
+	broadphase = new btAxisSweep3(worldMin, worldMax);
+
+	solver = new btSequentialImpulseConstraintSolver();
+
+	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+	dynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128;  //for direct solver, it is better to solve multiple objects together, small batches have high overhead
+	dynamicsWorld->getSolverInfo().m_numIterations = 100;
+
+	dynamicsWorld->setGravity(btVector3(0,-90.8,0));
+	btTransform tr;
+	tr.setIdentity();
+	tr.setOrigin(btVector3(0, -3, 0));
+
+	//either use heightfield or triangle mesh
+
+	//create ground object
+	btRigidBody *ground = localCreateRigidBody(0, tr, groundShape);
+	ground->setFriction(1);
+
+	createVehicle(collisionShapes, chasisSize);
 
     SetConfigFlags(FLAG_FULLSCREEN_MODE);
     SetConfigFlags(FLAG_MSAA_4X_HINT);
