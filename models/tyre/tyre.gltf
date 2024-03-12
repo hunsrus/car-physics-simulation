@@ -1,0 +1,236 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.5.17",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "extras" : {
+                "yabee_settings" : {
+                    "opt_tex_proc" : 0,
+                    "opt_tbs_proc" : 0,
+                    "opt_bake_diffuse" : {
+                        "export" : 1,
+                        "res_x" : 512,
+                        "res_y" : 512
+                    },
+                    "opt_bake_normal" : {
+                        "export" : 0,
+                        "res_x" : 512,
+                        "res_y" : 512
+                    },
+                    "opt_bake_gloss" : {
+                        "export" : 0,
+                        "res_x" : 512,
+                        "res_y" : 512
+                    },
+                    "opt_bake_glow" : {
+                        "export" : 0,
+                        "res_x" : 512,
+                        "res_y" : 512
+                    },
+                    "opt_bake_AO" : {
+                        "export" : 0,
+                        "res_x" : 512,
+                        "res_y" : 512
+                    },
+                    "opt_bake_shadow" : {
+                        "export" : 0,
+                        "res_x" : 512,
+                        "res_y" : 512
+                    },
+                    "opt_export_uv_as_texture" : 0,
+                    "opt_copy_tex_files" : 1,
+                    "opt_separate_anim_files" : 1,
+                    "opt_anim_only" : 0,
+                    "opt_tex_path" : "./tex",
+                    "opt_merge_actor" : 1,
+                    "opt_apply_modifiers" : 1,
+                    "opt_pview" : 0,
+                    "opt_use_loop_normals" : 0,
+                    "opt_export_pbs" : 0,
+                    "opt_force_export_vertex_colors" : 0,
+                    "first_run" : 0
+                },
+                "glTF2ExportSettings" : {
+                    "export_extras" : 1,
+                    "export_format" : "GLTF_SEPARATE",
+                    "export_tangents" : 1,
+                    "use_selection" : 1
+                }
+            },
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "extras" : {
+                "yabee_name" : "Tyre"
+            },
+            "mesh" : 0,
+            "name" : "Tyre"
+        }
+    ],
+    "materials" : [
+        {
+            "extras" : {
+                "yabee_name" : "MaterialTyre",
+                "yabee_texture_slots" : "0_Base\u00011_Metal\u00012_Normal\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001",
+                "pbr_export_settings" : {
+                    "occlusion_texture" : "tyre_metal",
+                    "metallic_factor" : 0.6000000238418579,
+                    "hardness_float" : 76.12499237060547
+                }
+            },
+            "name" : "MaterialTyre",
+            "normalTexture" : {
+                "index" : 0
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 1
+                },
+                "metallicRoughnessTexture" : {
+                    "index" : 2
+                },
+                "roughnessFactor" : 0.5
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "extras" : {
+                "yabee_name" : "Cylinder"
+            },
+            "name" : "Cylinder",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TANGENT" : 2,
+                        "TEXCOORD_0" : 3
+                    },
+                    "indices" : 4,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        },
+        {
+            "sampler" : 0,
+            "source" : 1
+        },
+        {
+            "sampler" : 0,
+            "source" : 2
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "tyre_normal",
+            "uri" : "tyre_normal.png"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "tyre_base",
+            "uri" : "tyre_base.png"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "tyre_metal",
+            "uri" : "tyre_metal.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 610,
+            "max" : [
+                0.3302508294582367,
+                0.3302508294582367,
+                0.15936942398548126
+            ],
+            "min" : [
+                -0.3302507996559143,
+                -0.3302508294582367,
+                -0.1663932502269745
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 610,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 610,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 610,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5123,
+            "count" : 1620,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 7320,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 7320,
+            "byteOffset" : 7320
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 9760,
+            "byteOffset" : 14640
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 4880,
+            "byteOffset" : 24400
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 3240,
+            "byteOffset" : 29280
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 32520,
+            "uri" : "tyre.bin"
+        }
+    ]
+}

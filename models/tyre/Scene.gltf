@@ -1,0 +1,254 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v1.5.17",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "uri": "Scene.bin",
+      "byteLength": 32520
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 7320,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 7320,
+      "byteLength": 7320,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 14640,
+      "byteLength": 9760,
+      "byteStride": 16,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 24400,
+      "byteLength": 4880,
+      "byteStride": 8,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 29280,
+      "byteLength": 3240,
+      "target": 34963
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "normalized": false,
+      "count": 610,
+      "min": [
+        -0.1664091944694519,
+        -0.3302508294582367,
+        -0.3302849531173706
+      ],
+      "max": [
+        0.15944939851760864,
+        0.3302508294582367,
+        0.3302830159664154
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "normalized": false,
+      "count": 610,
+      "min": [
+        -0.9999999403953552,
+        -0.9587220549583435,
+        -0.958647608757019
+      ],
+      "max": [
+        0.9999999403953552,
+        0.9587220549583435,
+        0.9587963819503784
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "normalized": false,
+      "count": 610,
+      "min": [
+        -0.9984368085861206,
+        -1,
+        -0.7149379849433899,
+        1
+      ],
+      "max": [
+        1,
+        1,
+        0.7149381041526794,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "normalized": false,
+      "count": 610,
+      "min": [
+        0.0004728078201878816,
+        0.006865024566650391
+      ],
+      "max": [
+        0.9995271563529968,
+        0.9995272159576416
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 4,
+      "byteOffset": 0,
+      "componentType": 5123,
+      "normalized": false,
+      "count": 1620,
+      "min": [
+        0
+      ],
+      "max": [
+        609
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "Scene"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Tyre",
+      "mesh": 0
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "material": 0,
+          "mode": 4,
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "MaterialTyre",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 1,
+        "roughnessFactor": 0.5,
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1,
+          "texCoord": 0
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false,
+      "normalTexture": {
+        "index": 2,
+        "texCoord": 0,
+        "scale": 1
+      }
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "name": "tyre_base.png",
+      "source": 0
+    },
+    {
+      "sampler": 1,
+      "name": "tyre_metal.png",
+      "source": 1
+    },
+    {
+      "sampler": 2,
+      "name": "tyre_normal.png",
+      "source": 2
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "images": [
+    {
+      "uri": "tyre_base.png",
+      "mimeType": "image/png"
+    },
+    {
+      "uri": "tyre_metal.png",
+      "mimeType": "image/png"
+    },
+    {
+      "uri": "tyre_normal.png",
+      "mimeType": "image/png"
+    }
+  ]
+}
