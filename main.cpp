@@ -255,7 +255,7 @@ void createVehicle(btAlignedObjectArray<btCollisionShape*> &collisionShapes, btV
 	carChassis = localCreateRigidBody(chassisMass, tr, compound);  //chassisShape);
 	//carChassis->setCollisionFlags(carChassis->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	//carChassis->setDamping(0.2,0.2);
-	carChassis->setFriction(2);
+	carChassis->setFriction(0.5);
 
 	//RUEDAS
 	//wheelShape = new btCylinderShapeX(btVector3(wheelWidth,wheelRadius,wheelRadius));
@@ -400,6 +400,15 @@ int main(void)
 
 	createVehicle(collisionShapes, chasisSize);
 
+	int rampWidth = 100,  rampHeight = 10, rampLength = 100;
+	btCollisionShape* rampShape = new btBoxShape(btVector3(rampWidth/2, rampHeight/2, rampLength/2));
+	collisionShapes.push_back(rampShape);
+	tr.setIdentity();
+	tr.setOrigin(btVector3(100, 0, 100));
+	tr.getBasis().setEulerYPR(0,0,PI/20);
+	btRigidBody *ramp = localCreateRigidBody(0, tr, rampShape);
+	ramp->setFriction(1);
+
     SetConfigFlags(FLAG_FULLSCREEN_MODE);
     SetConfigFlags(FLAG_MSAA_4X_HINT);
     InitWindow(screenWidth, screenHeight, "bullet car test");
@@ -417,6 +426,7 @@ int main(void)
 	wheel3Model->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTextureFromImage(LoadImage(std::string("../models/tyre/tyre_base.png").c_str()));
 	Model* wheel4Model = new Model(LoadModel(std::string("../models/tyre/Scene.gltf").c_str()));
 	wheel4Model->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTextureFromImage(LoadImage(std::string("../models/tyre/tyre_base.png").c_str()));
+	Model* rampModel = new Model(LoadModelFromMesh(GenMeshCube(rampWidth,rampHeight,rampLength)));
 
        // Define the camera to look into our 3d world
     Camera camera = { {-20.0f, 10.0f, 0.0f}, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 45.0f, 0 };
@@ -610,7 +620,7 @@ int main(void)
 				wheel4Model->transform = MatrixRotateXYZ((Vector3){ roll, -pitch+PI, -yaw });	//invierto roll y le sumo PI al pitch para girar el modelo
 			}else if(j == 6)
 			{
-				//bodyModel->transform = MatrixRotateXYZ((Vector3){ -roll, -pitch, -yaw });
+				rampModel->transform = MatrixRotateXYZ((Vector3){ -roll, -pitch, -yaw });
 			}
 			//printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
 		}
@@ -648,7 +658,8 @@ int main(void)
 				//DrawCylinderEx((Vector3){bodyPos[4].x-0.25f,bodyPos[4].y,bodyPos[4].z},(Vector3){bodyPos[4].x+0.25f,bodyPos[4].y,bodyPos[4].z},2.5f,2.5f,10,BLUE);
 				//DrawCylinderEx((Vector3){bodyPos[5].x-0.25f,bodyPos[5].y,bodyPos[5].z},(Vector3){bodyPos[5].x+0.25f,bodyPos[5].y,bodyPos[5].z},2.5f,2.5f,10,ORANGE);
                 //DrawSphere(bodyPos[4],2.0f,WHITE);
-				for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 6; j--)
+				DrawModel(*rampModel,bodyPos[6],1.0f,BROWN);	// rampa
+				for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 7; j--)
 				{	
 					btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
 					btRigidBody* body = btRigidBody::upcast(obj);
